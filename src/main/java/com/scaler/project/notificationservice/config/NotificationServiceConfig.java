@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @Configuration
-public class ApplicationConfig {
+public class NotificationServiceConfig {
 
     @Bean
     public ObjectMapper objectMapper(){
