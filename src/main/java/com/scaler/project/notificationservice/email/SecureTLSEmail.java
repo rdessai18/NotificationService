@@ -7,7 +7,7 @@ import jakarta.mail.Session;
 
 import java.util.Properties;
 
-public class SecureEmail {
+public class SecureTLSEmail {
     public static void sendSecureEmail(String toEmail, String subject, String body){
         final String fromEmail = "rjtdessai@gmail.com"; //requires valid gmail id
         final String password = "jibxiweyrojmdvpj"; // correct password for gmail id

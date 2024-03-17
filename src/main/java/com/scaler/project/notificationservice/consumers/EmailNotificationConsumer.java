@@ -3,10 +3,9 @@ package com.scaler.project.notificationservice.consumers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scaler.project.notificationservice.consumers.dto.EmailNotificationDto;
-import com.scaler.project.notificationservice.email.SecureEmail;
+import com.scaler.project.notificationservice.email.SecureTLSEmail;
 import com.scaler.project.notificationservice.email.util.EmailUtil;
 import jakarta.mail.Session;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +35,7 @@ public class EmailNotificationConsumer {
         String toEmail = emailNotificationDto.getTo();
         String subject = emailNotificationDto.getSubject();
         String body = emailNotificationDto.getBody();
-        SecureEmail.sendSecureEmail(toEmail, subject, body);
+        SecureTLSEmail.sendSecureEmail(toEmail, subject, body);
     }
 
     private void sendEmailNotification() {
