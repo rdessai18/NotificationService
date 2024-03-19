@@ -11,7 +11,6 @@ public class SimpleEmail {
         String emailID = "email_me@example.com";
 
         Properties props = System.getProperties();
-
         props.put("mail.smtp.host", smtpHostServer);
 
         Session session = Session.getInstance(props, null);

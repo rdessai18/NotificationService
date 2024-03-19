@@ -8,12 +8,14 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.internet.MimeMultipart;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+@Slf4j
 public class EmailUtil {
 
     /**
@@ -31,25 +33,22 @@ public class EmailUtil {
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
             msg.addHeader("format", "flowed");
             msg.addHeader("Content-Transfer-Encoding", "8bit");
-
             msg.setFrom(new InternetAddress("no_reply@example.com", "Scaler"));
 
             //msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
 
             msg.setSubject(subject, "UTF-8");
-
             msg.setText(body, "UTF-8");
-
             msg.setSentDate(new Date());
-
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
-            System.out.println("Message is ready");
-            Transport.send(msg);
 
-            System.out.println("EMail Sent Successfully!!");
+            log.info("Message is ready");
+
+            Transport.send(msg);
+            log.info("EMail Sent Successfully!!");
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
@@ -69,13 +68,9 @@ public class EmailUtil {
             msg.addHeader("Content-Transfer-Encoding", "8bit");
 
             msg.setFrom(new InternetAddress("no_reply@example.com", "NoReply-JD"));
-
             msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
-
             msg.setSubject(subject, "UTF-8");
-
             msg.setSentDate(new Date());
-
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
 
             // Create the message body part
@@ -103,9 +98,9 @@ public class EmailUtil {
 
             // Send message
             Transport.send(msg);
-            System.out.println("EMail Sent Successfully with attachment!!");
+            log.info("EMail Sent Successfully with attachment!!");
         }catch (MessagingException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
@@ -125,13 +120,9 @@ public class EmailUtil {
             msg.addHeader("Content-Transfer-Encoding", "8bit");
 
             msg.setFrom(new InternetAddress("no_reply@example.com", "NoReply-JD"));
-
             msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
-
             msg.setSubject(subject, "UTF-8");
-
             msg.setSentDate(new Date());
-
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
 
             // Create the message body part
@@ -166,11 +157,9 @@ public class EmailUtil {
 
             // Send message
             Transport.send(msg);
-            System.out.println("EMail Sent Successfully with image!!");
-        }catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.info("EMail Sent Successfully with image!!");
+        }catch (MessagingException | UnsupportedEncodingException e) {
+            log.error(e.getMessage());
         }
     }
 }
